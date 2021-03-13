@@ -1,94 +1,62 @@
 #include <SoftwareSerial.h>  //Cambiamos RX pin 9 TX pin 10 del bluetooth
  SoftwareSerial BT(9,10);      //Para que no interfieran en la carga del sketch con el USB
- 
-int motor11 = 7; // 
-int motor12 = 8; // 
-int enable1 = 5; // 
 
-int motor21 = 3; // 
-int motor22 = 4; // 
-int enable2 = 6; // 
-
-
+//motor izquierdo
+int M2A=7;
+int M2B=8;
+int pwm2=5;
+//motor derecho
+int M1A=3;
+int M1B=4;
+int pwm1=6;
 
 int selecrc=10;
 int selecau=11;
 
-
 int estado;
 
-
 void setup() {
+   BT.begin(9600);      //Comunicacion serial para el bluetooth
+   Serial.begin(9600);  //Comunicacion serial para el monitor serial
     //Configuramos los pines de salida:
-    pinMode(motor11, OUTPUT);
-    pinMode(motor12, OUTPUT);
-    pinMode(enable1, OUTPUT);
-    pinMode(motor21, OUTPUT);
-    pinMode(motor22, OUTPUT);
-    pinMode(enable2, OUTPUT);
-
-
+   setupMotores();
     // Velocidad de los motores al iniciar
-        digitalWrite(enable1, HIGH);//derecha
-        digitalWrite(enable2, HIGH);//izquiera
-
-
-  
-    BT.begin(9600);      //Comunicacion serial para el bluetooth
-    Serial.begin(9600);  //Comunicacion serial para el monitor serial
-
+   velmotor(0,0);
 }
 
 void loop() {
-
-
-//        digitalWrite(motor11, LOW); 
-//        digitalWrite(motor12, HIGH);
-//        digitalWrite(motor21, LOW);
-//        digitalWrite(motor22, HIGH);
-
-    if(BT.available() > 0){     
-      estado = BT.read();   
+      //Bluetooth
+      //if(BT.available() > 0){     
+      //estado = BT.read();
+      //Serial
+      if(Serial.available() > 0){     
+      estado = Serial.read();   
       Serial.println(estado);
     }   
-
-
    // AVANCE:
     if (estado == 'F') {
-        digitalWrite(motor11, HIGH);
-        digitalWrite(motor12, LOW); 
-        digitalWrite(motor21, HIGH);
-        digitalWrite(motor22, LOW);
-    }
-    
+        velmotor(100,100);
+        Serial.println("Avance");
+    }  
     // IZQUIERDA
     else if (estado == 'L') {
-        digitalWrite(motor11, LOW); 
-        digitalWrite(motor12, HIGH); 
-        digitalWrite(motor21, HIGH);
-        digitalWrite(motor22, LOW);
+        velmotor(-100,100);
+        Serial.println("Izq");
     }
     // PARADO
     else if (estado == 'S' ) {
-        digitalWrite(motor11, LOW); 
-        digitalWrite(motor12, LOW); 
-        digitalWrite(motor21, LOW);
-        digitalWrite(motor22, LOW);
+        velmotor(0,0);
+        freno(true,true);
+        Serial.println("Parar");
     }
     // DERECHA
     else if (estado == 'R') {
-        digitalWrite(motor11, HIGH); 
-        digitalWrite(motor12, LOW); 
-        digitalWrite(motor21, LOW);
-        digitalWrite(motor22, HIGH);
+        velmotor(100,-100);
+        Serial.println("Der");
     }
     // REVERSA
     else if (estado == 'B') {
-        digitalWrite(motor11, LOW); 
-        digitalWrite(motor12, HIGH);
-        digitalWrite(motor21, LOW);
-        digitalWrite(motor22, HIGH);
+        velmotor(-100,-100);
+        Serial.println("Reversa");
     }
-
-
 }
