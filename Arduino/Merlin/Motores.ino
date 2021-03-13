@@ -1,3 +1,12 @@
+//motor izquierdo
+int M2A = 7;
+int M2B = 8;
+int pwm2 = 5;
+//motor derecho
+int M1A = 3;
+int M1B = 4;
+int pwm1 = 6;
+
 void setupMotores () {
   pinMode(M1A, OUTPUT);
   pinMode(M1B, OUTPUT);
@@ -7,7 +16,7 @@ void setupMotores () {
   pinMode(pwm2, OUTPUT);
 }
 
-//motores velocidad izquierda
+//motor velocidad izquierda
 void velizq(int value)
 {
   if (value >= 0)
@@ -19,21 +28,18 @@ void velizq(int value)
   {
     digitalWrite(M1A, HIGH);
     digitalWrite(M1B, LOW);
-
     value *= -1;
   }
   analogWrite(pwm1, value);
 }
 
-
-//motores velocidad derecha
+//motor velocidad derecha
 void velder(int value)
 {
   if (value >= 0)
   {
     digitalWrite(M2A, LOW);
     digitalWrite(M2B, HIGH);
-
   }
   else
   {

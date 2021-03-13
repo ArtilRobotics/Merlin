@@ -32,10 +32,9 @@ if(Serial.available()>0)
       char delimitadores[]=",";
       char *resultado=NULL;
       resultado=strtok(str,delimitadores);
-     
+      
       while(resultado!=NULL)
-      {
-         
+      {        
          arreglo_2=arreglo_1;
          arreglo_1=atof(resultado);
          resultado=strtok(NULL,delimitadores); 
@@ -43,6 +42,8 @@ if(Serial.available()>0)
       
        variable_1=arreglo_2;
        variable_2=arreglo_1;
+       Serial.println(variable_1);
+       Serial.println(variable_2);
        cadena="";
       } 
      
