@@ -15,6 +15,13 @@ int selecau=11;
 
 int estado;
 
+// variables de comunicacion
+float Cv=10;//set point
+char cadena[30];
+byte posicion=0;
+char inputString[ 255 ];
+uint8_t index = 0;
+
 void setup() {
    BT.begin(9600);      //Comunicacion serial para el bluetooth
    Serial.begin(9600);  //Comunicacion serial para el monitor serial
@@ -59,4 +66,20 @@ void loop() {
         velmotor(-100,-100);
         Serial.println("Reversa");
     }
+}
+void serialEvent() {
+  while (Serial.available()) {
+    char inChar = (char)Serial.read();
+    char letra=Serial.read();
+      inputString[ index++ ] = inChar;
+    if (inChar == '\n') {
+      inputString[ index ] = 0;
+
+      
+      Cv = atoi( inputString );
+      index = 0;
+    }
+    
+   
+  }
 }
