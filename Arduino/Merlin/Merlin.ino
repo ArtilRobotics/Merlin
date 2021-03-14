@@ -1,8 +1,6 @@
+#include "Motores.h"
 #include <SoftwareSerial.h>  //Cambiamos RX pin 9 TX pin 10 del bluetooth
 SoftwareSerial BT(9, 10);     //Para que no interfieran en la carga del sketch con el USB
-
-int selecrc = 10;
-int selecau = 11;
 
 int estado;
 
@@ -20,8 +18,6 @@ void loop() {
   //if(BT.available() > 0){
   //estado = BT.read();
   //Serial
-  Recive();
-
   //  if (Serial.available() > 0) {
   //    estado = Serial.read();
   //

@@ -1,11 +1,15 @@
+#include <Arduino.h>
+
+//Definimos los pines
+
 //motor izquierdo
-int M2A = 7;
-int M2B = 8;
-int pwm2 = 5;
+#define M2A 7
+#define M2B 8
+#define pwm2 5
 //motor derecho
-int M1A = 3;
-int M1B = 4;
-int pwm1 = 6;
+#define M1A 3
+#define M1B 4
+#define pwm1 6
 
 void setupMotores () {
   pinMode(M1A, OUTPUT);
