@@ -1,10 +1,6 @@
-#include "Uduino.h"  
-
-//#undef UDUINO_HARDWAREONLY
-//#define UDUINO_HARDWAREONLY 0
 #include <SoftwareSerial.h>
 SoftwareSerial BT(9,10);
-Uduino uduino((9,10),"Merlin");
+Uduino uduino(BT,"Merlin");
 
 #define Led1 11
 #define Led2 12
