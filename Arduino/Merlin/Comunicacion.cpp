@@ -6,6 +6,7 @@ Comunicacion::Comunicacion(char *str,char separator,int dataLength)
     _str=str;
     _separator=separator;
     _dataLength=dataLength;
+    _vector=new float[dataLength];
     
 }
 float *Comunicacion::lectura()

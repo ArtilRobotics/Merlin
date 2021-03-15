@@ -11,6 +11,7 @@ class Comunicacion
         char *_str;
         char _separator;
         int _dataLength;
+        float *_vector;
         
 };
 

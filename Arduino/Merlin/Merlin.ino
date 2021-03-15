@@ -3,6 +3,7 @@
 SoftwareSerial BT(9, 10);     //Para que no interfieran en la carga del sketch con el USB
 // incluir la libreria de la comunicacion
 #include "Comunicacion.h"
+#include "Motores.h"
 int dimension=4;
 Comunicacion fer("",'/',dimension);
 float* dato;
